@@ -11,17 +11,21 @@ app.use(bodyParser.json());
 
 const apiRouter = express.Router();
 
-// You can delete this route once you add your own routes
+// Veritabanı tablolarını gösteren rota
 apiRouter.get("/", async (req, res) => {
   const SHOW_TABLES_QUERY =
     process.env.DB_CLIENT === "pg"
       ? "SELECT * FROM pg_catalog.pg_tables;"
       : "SHOW TABLES;";
-  const tables = await knex.raw(SHOW_TABLES_QUERY);
-  res.json({ tables });
+  try {
+    const tables = await knex.raw(SHOW_TABLES_QUERY);
+    res.json({ tables });
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
 });
 
-// This nested router example can also be replaced with your own sub-router
+// Nested router kullanımı
 apiRouter.use("/nested", nestedRouter);
 
 app.use("/api", apiRouter);
