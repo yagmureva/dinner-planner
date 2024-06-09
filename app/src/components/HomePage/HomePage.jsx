@@ -1,11 +1,13 @@
 import React from "react";
 import calender from "../../assets/calender.svg";
-import "./HomePage.css";
 import recipes from "../../assets/recipes.svg";
 import shoppinglist from "../../assets/shoppinglist.svg";
 import ingredients from "../../assets/ingredients.svg";
 import github from "../../assets/github.svg";
 import linkedin from "../../assets/linkedin.svg";
+import Calendar from "../CalendarPage/Calendar";
+import RecipeManager from "../Recipe/RecipeManager";
+import "./HomePage.css";
 
 function HomePage() {
   return (
@@ -40,16 +42,11 @@ function HomePage() {
               dates and add your planned meals for each day. Highlighted days
               show your planned dinners.
             </p>
-            <button>View Calendar</button>
+            <Calendar />
           </div>
           <div className="feature">
             <img src={recipes} alt="Recipe Suggestions" />
-            <h3>Recipe Suggestions</h3>
-            <p>
-              Get personalized recipe suggestions based on your preferences. Our
-              AI recommends dishes that suit your taste and dietary needs.
-            </p>
-            <button>Get Suggestions</button>
+            <RecipeManager />
           </div>
           <div className="feature">
             <img src={shoppinglist} alt="Grocery List Generator" />
