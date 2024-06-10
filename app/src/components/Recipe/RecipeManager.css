@@ -1,0 +1,46 @@
+/* RecipeManager.css */
+
+.recipe-manager {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.add-recipe,
+.recipe-list {
+  margin-top: 20px;
+}
+
+.add-recipe input,
+.add-recipe textarea {
+  display: block;
+  width: 80%;
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.add-recipe button {
+  padding: 10px 20px;
+  margin-top: 10px;
+}
+
+.recipe-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.recipe-list li {
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  padding: 15px;
+  margin: 10px auto;
+  width: 80%;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.recipe-list li h4 {
+  margin: 0 0 10px;
+}
+
+.recipe-list li button {
+  padding: 5px 10px;
+}
