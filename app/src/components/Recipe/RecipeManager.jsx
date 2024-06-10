@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import api from "../../api";
 import { TextField, Button, Typography } from "@mui/material";
 import "./RecipeManager.css";
 
@@ -14,21 +15,27 @@ const RecipeManager = () => {
   const [loading, setLoading] = useState(false);
   const [showRecipes, setShowRecipes] = useState(false);
 
-  const fetchRecipes = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch("/api/nested/recipes");
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
+  useEffect(() => {
+    async function fetchRecipes() {
+      setLoading(true);
+      try {
+        const response = await fetch(api("/recipes"));
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        const data = await response.json();
+        setRecipes(data);
+      } catch (error) {
+        console.error("Error fetching recipes:", error);
+      } finally {
+        setLoading(false);
       }
-      const data = await response.json();
-      setRecipes(data);
-    } catch (error) {
-      console.error("Error fetching recipes:", error);
-    } finally {
-      setLoading(false);
     }
-  };
+
+    if (showRecipes) {
+      fetchRecipes();
+    }
+  }, [showRecipes]);
 
   const handleAddRecipe = async (e) => {
     e.preventDefault();
@@ -44,12 +51,9 @@ const RecipeManager = () => {
       return;
     }
 
-    const url = "/api/nested/recipes";
-    const method = "POST";
-
     try {
-      const response = await fetch(url, {
-        method,
+      const response = await fetch(api("/recipes"), {
+        method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
@@ -60,7 +64,6 @@ const RecipeManager = () => {
       }
       const data = await response.json();
       setRecipes([...recipes, data]);
-
       setNewRecipe({
         name: "",
         description: "",
@@ -75,7 +78,7 @@ const RecipeManager = () => {
 
   const handleDeleteRecipe = async (id) => {
     try {
-      const response = await fetch(`/api/nested/recipes/${id}`, {
+      const response = await fetch(api(`/recipes/${id}`), {
         method: "DELETE",
       });
       if (!response.ok) {
@@ -86,12 +89,6 @@ const RecipeManager = () => {
       console.error("Error deleting recipe:", error);
     }
   };
-
-  useEffect(() => {
-    if (showRecipes) {
-      fetchRecipes();
-    }
-  }, [showRecipes]);
 
   return (
     <div className="recipe-manager">
