@@ -30,6 +30,7 @@ apiRouter.use("/nested", nestedRouter);
 
 app.use("/api", apiRouter);
 
-app.listen(process.env.PORT, () => {
-  console.log(`API listening on port ${process.env.PORT}`);
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`API listening on port ${PORT}`);
 });
