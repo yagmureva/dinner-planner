@@ -3,7 +3,11 @@ import express from "express";
 import cors from "cors";
 import bodyParser from "body-parser";
 import knex from "./database_client.js";
-import nestedRouter from "./routers/nested.js";
+import usersRouter from "./routers/users.js";
+import recipesRouter from "./routers/recipes.js";
+import ingredientsRouter from "./routers/ingredients.js";
+import mealPlansRouter from "./routers/mealPlans.js";
+import recipeIngredientsRouter from "./routers/recipeIngredients.js";
 
 const app = express();
 app.use(cors());
@@ -25,12 +29,15 @@ apiRouter.get("/", async (req, res) => {
   }
 });
 
-// Nested router kullanımı
-apiRouter.use("/nested", nestedRouter);
+// Sub-routers
+apiRouter.use("/users", usersRouter);
+apiRouter.use("/recipes", recipesRouter);
+apiRouter.use("/ingredients", ingredientsRouter);
+apiRouter.use("/meal-plans", mealPlansRouter);
+apiRouter.use("/recipe-ingredients", recipeIngredientsRouter);
 
 app.use("/api", apiRouter);
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`API listening on port ${PORT}`);
+app.listen(process.env.PORT, () => {
+  console.log(`API listening on port ${process.env.PORT}`);
 });
