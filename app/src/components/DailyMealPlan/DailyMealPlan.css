@@ -1,16 +1,16 @@
-.recipe-manager {
+.daily-meal-plan {
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.recipe-manager h4,
-.recipe-manager h5 {
+.daily-meal-plan h4,
+.daily-meal-plan h5 {
   text-align: center;
   margin-bottom: 20px;
 }
 
-.add-recipe {
+.add-meal-plan {
   background-color: #f9f9f9;
   padding: 20px;
   border-radius: 8px;
@@ -18,29 +18,25 @@
   margin-bottom: 40px;
 }
 
-.add-recipe form {
+.add-meal-plan form {
   display: flex;
   flex-direction: column;
 }
 
-.add-recipe form > * {
+.add-meal-plan form > * {
   margin-bottom: 15px;
 }
 
-.recipe-list {
+.meal-plan-list {
   text-align: center;
 }
 
-.recipe-list button {
-  margin-top: 20px;
-}
-
-.recipe-list ul {
+.meal-plan-list ul {
   list-style: none;
   padding: 0;
 }
 
-.recipe-list li {
+.meal-plan-list li {
   background-color: #f0f0f0;
   margin: 10px 0;
   padding: 20px;
@@ -48,14 +44,14 @@
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-.recipe-list li h6 {
+.meal-plan-list li h6 {
   margin: 0 0 10px 0;
 }
 
-.recipe-list li p {
+.meal-plan-list li p {
   margin: 0;
 }
 
-.recipe-list li button {
+.meal-plan-list li button {
   margin-top: 10px;
 }

@@ -7,9 +7,16 @@ import github from "../../assets/github.svg";
 import linkedin from "../../assets/linkedin.svg";
 import Calendar from "../CalendarPage/Calendar";
 import RecipeManager from "../Recipe/RecipeManager";
+import GroceryListGenerator from "../GroceryListGenerator/GroceryListGenerator"; // Import the GroceryListGenerator component
 import "./HomePage.css";
 
 function HomePage() {
+  const handleGenerateGroceryList = () => {
+    console.log("Grocery List Generator button clicked");
+    // Logic to show or navigate to the Grocery List Generator component/page
+    // This could be a state change to show the component or a navigation action
+  };
+
   return (
     <div className="homepage">
       <header>
@@ -56,7 +63,7 @@ function HomePage() {
               recipes. Add or remove items as needed to customize your shopping
               experience.
             </p>
-            <button>Generate Grocery List</button>
+            <GroceryListGenerator />
           </div>
           <div className="feature">
             <img src={ingredients} alt="Nutritional Information" />

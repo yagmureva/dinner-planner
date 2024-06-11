@@ -4,6 +4,7 @@ import "./Calendar.css";
 
 function Calendar() {
   const navigate = useNavigate();
+
   const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
   const handleDateClick = (day) => {
