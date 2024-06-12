@@ -65,15 +65,6 @@ function HomePage() {
             </p>
             <GroceryListGenerator />
           </div>
-          <div className="feature">
-            <img src={ingredients} alt="Nutritional Information" />
-            <h3>Nutritional Information</h3>
-            <p>
-              Stay informed about your meals' nutritional content. View detailed
-              breakdowns of calories, macronutrients, and more for each recipe.
-            </p>
-            <button>View Nutrition Details</button>
-          </div>
         </div>
       </section>
 
