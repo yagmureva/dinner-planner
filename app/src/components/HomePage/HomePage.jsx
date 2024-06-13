@@ -1,22 +1,12 @@
 import React from "react";
-import calender from "../../assets/calender.svg";
-import recipes from "../../assets/recipes.svg";
-import shoppinglist from "../../assets/shoppinglist.svg";
-import ingredients from "../../assets/ingredients.svg";
-import github from "../../assets/github.svg";
-import linkedin from "../../assets/linkedin.svg";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Calendar from "../CalendarPage/Calendar";
 import RecipeManager from "../Recipe/RecipeManager";
-import GroceryListGenerator from "../GroceryListGenerator/GroceryListGenerator"; // Import the GroceryListGenerator component
+import GroceryListGenerator from "../GroceryListGenerator/GroceryListGenerator";
+import DinnerModel from "../DinnerModel";
 import "./HomePage.css";
 
 function HomePage() {
-  const handleGenerateGroceryList = () => {
-    console.log("Grocery List Generator button clicked");
-    // Logic to show or navigate to the Grocery List Generator component/page
-    // This could be a state change to show the component or a navigation action
-  };
-
   return (
     <div className="homepage">
       <header>
@@ -42,7 +32,7 @@ function HomePage() {
         <h2>Features</h2>
         <div className="features-container">
           <div className="feature">
-            <img src={calender} alt="Interactive Calendar" />
+            <img src="/assets/calender.svg" alt="Interactive Calendar" />
             <h3>Interactive Calendar</h3>
             <p>
               Plan your meals effortlessly with our interactive calendar. Select
@@ -52,11 +42,11 @@ function HomePage() {
             <Calendar />
           </div>
           <div className="feature">
-            <img src={recipes} alt="Recipe Suggestions" />
+            <img src="/assets/recipes.svg" alt="Recipe Suggestions" />
             <RecipeManager />
           </div>
           <div className="feature">
-            <img src={shoppinglist} alt="Grocery List Generator" />
+            <img src="/assets/shoppinglist.svg" alt="Grocery List Generator" />
             <h3>Grocery List Generator</h3>
             <p>
               Generate a comprehensive grocery list based on your selected
@@ -64,6 +54,18 @@ function HomePage() {
               experience.
             </p>
             <GroceryListGenerator />
+          </div>
+          <div className="feature">
+            <img src="/assets/ingredients.svg" alt="Nutritional Information" />
+            <h3>Nutritional Information</h3>
+            <p>
+              Stay informed about your meals' nutritional content. View detailed
+              breakdowns of calories, macronutrients, and more for each recipe.
+            </p>
+          </div>
+          <div className="feature">
+            <h3>3D Dinner Model</h3>
+            <DinnerModel />
           </div>
         </div>
       </section>
@@ -75,8 +77,8 @@ function HomePage() {
           <a href="#privacy">Privacy Policy</a>
         </div>
         <div className="social-icons">
-          <img src={github} alt="GitHub" />
-          <img src={linkedin} alt="LinkedIn" />
+          <img src="/assets/github.svg" alt="GitHub" />
+          <img src="/assets/linkedin.svg" alt="LinkedIn" />
         </div>
         <div className="newsletter-signup">
           <input type="email" placeholder="Enter your email" />
