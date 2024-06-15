@@ -6,6 +6,8 @@ import Calendar from "./components/CalendarPage/Calendar.jsx";
 import DailyMealPlan from "./components/DailyMealPlan/DailyMealPlan.jsx";
 import RecipeManager from "./components/Recipe/RecipeManager.jsx";
 import GroceryListGenerator from "./components/GroceryListGenerator/GroceryListGenerator.jsx";
+import RecipeSelector from "./components/Recipe/RecipeSelector.jsx";
+
 import "./main.css";
 
 const router = createBrowserRouter([
@@ -21,6 +23,7 @@ const router = createBrowserRouter([
     path: "/calendar/:day",
     element: <DailyMealPlan />,
   },
+
   {
     path: "/recipes",
     element: <RecipeManager />,
@@ -28,6 +31,10 @@ const router = createBrowserRouter([
   {
     path: "/grocery-list",
     element: <GroceryListGenerator />,
+  },
+  {
+    path: "/calendar/:day/select-recipe",
+    element: <RecipeSelector />,
   },
 ]);
 

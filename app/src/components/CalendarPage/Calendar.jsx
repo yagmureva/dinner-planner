@@ -1,19 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
+import { useNavigate } from "react-router-dom";
 import "./Calendar.css";
 
 function Calendar() {
-  const [mealPlans, setMealPlans] = useState({}); // Günlere ait yemek planlarını tutmak için bir state
+  const navigate = useNavigate();
 
   const daysInMonth = (month, year) => new Date(year, month, 0).getDate();
 
   const handleDateClick = (day) => {
-    const meal = prompt("Enter your meal plan for the day:");
-    if (meal) {
-      setMealPlans((prevMealPlans) => ({
-        ...prevMealPlans,
-        [day]: meal,
-      }));
-    }
+    navigate(`/calendar/${day}/select-recipe`);
   };
 
   const renderCalendar = () => {
@@ -26,8 +21,7 @@ function Calendar() {
     for (let i = 1; i <= days; i++) {
       daysArray.push(
         <div key={i} className="day" onClick={() => handleDateClick(i)}>
-          <div>{i}</div>
-          <div>{mealPlans[i]}</div> {/* Günün yemek planını göster */}
+          {i}
         </div>
       );
     }
