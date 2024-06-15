@@ -1,12 +1,28 @@
-import React from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import React, { useState } from "react";
 import Calendar from "../CalendarPage/Calendar";
 import RecipeManager from "../Recipe/RecipeManager";
-import GroceryListGenerator from "../GroceryListGenerator/GroceryListGenerator";
 import DinnerModel from "../DinnerModel";
 import "./HomePage.css";
 
 function HomePage() {
+  const [selectedDate, setSelectedDate] = useState(null);
+  const [selectedRecipes, setSelectedRecipes] = useState({});
+
+  const handleDateClick = (day) => {
+    setSelectedDate(day);
+  };
+
+  const handleRecipeSelect = (recipe) => {
+    if (selectedDate) {
+      setSelectedRecipes({
+        ...selectedRecipes,
+        [selectedDate]: recipe,
+      });
+    } else {
+      alert("Please select a date first!");
+    }
+  };
+
   return (
     <div className="homepage">
       <header>
@@ -32,18 +48,19 @@ function HomePage() {
         <h2>Features</h2>
         <div className="features-container">
           <div className="feature">
-            <img src="/assets/calender.svg" alt="Interactive Calendar" />
+            <img src="/assets/calendar.svg" alt="Interactive Calendar" />
             <h3>Interactive Calendar</h3>
             <p>
               Plan your meals effortlessly with our interactive calendar. Select
               dates and add your planned meals for each day. Highlighted days
               show your planned dinners.
             </p>
-            <Calendar />
+            <Calendar onDateClick={handleDateClick} />
           </div>
           <div className="feature">
             <img src="/assets/recipes.svg" alt="Recipe Suggestions" />
-            <RecipeManager />
+            <h3>Recipe Manager</h3>
+            <RecipeManager onRecipeSelect={handleRecipeSelect} />
           </div>
           <div className="feature">
             <img src="/assets/shoppinglist.svg" alt="Grocery List Generator" />
@@ -53,7 +70,6 @@ function HomePage() {
               recipes. Add or remove items as needed to customize your shopping
               experience.
             </p>
-            <GroceryListGenerator />
           </div>
           <div className="feature">
             <img src="/assets/ingredients.svg" alt="Nutritional Information" />
@@ -68,6 +84,12 @@ function HomePage() {
             <DinnerModel />
           </div>
         </div>
+        {selectedDate && selectedRecipes[selectedDate] && (
+          <div className="selected-recipe">
+            <h3>Recipe for {selectedDate}</h3>
+            <p>{selectedRecipes[selectedDate].name}</p>
+          </div>
+        )}
       </section>
 
       <footer>

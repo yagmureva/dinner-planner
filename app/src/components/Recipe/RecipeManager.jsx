@@ -3,7 +3,7 @@ import api from "../../api";
 import { TextField, Button, Typography } from "@mui/material";
 import "./RecipeManager.css";
 
-const RecipeManager = () => {
+const RecipeManager = ({ onRecipeSelect }) => {
   const [recipes, setRecipes] = useState([]);
   const [newRecipe, setNewRecipe] = useState({
     name: "",
@@ -71,6 +71,7 @@ const RecipeManager = () => {
         cook_time: "",
         user_id: "",
       });
+      onRecipeSelect(data);
     } catch (error) {
       console.error("Error adding recipe:", error);
     }
@@ -110,8 +111,6 @@ const RecipeManager = () => {
             label="Description"
             variant="outlined"
             fullWidth
-            multiline
-            rows={4}
             value={newRecipe.description}
             onChange={(e) =>
               setNewRecipe({ ...newRecipe, description: e.target.value })
@@ -148,43 +147,53 @@ const RecipeManager = () => {
             }
             required
           />
-          <Button type="submit" variant="contained" fullWidth>
+          <Button type="submit" variant="contained" color="primary">
             Add Recipe
           </Button>
         </form>
       </div>
-      <div className="recipe-list">
-        <Typography variant="h5">Recipe List</Typography>
-        <Button
-          variant="contained"
-          onClick={() => setShowRecipes(!showRecipes)}
-        >
-          {showRecipes ? "Hide Recipes" : "Show Recipes"}
-        </Button>
-        {showRecipes && (
-          <>
-            {loading ? (
-              <Typography>Loading recipes...</Typography>
-            ) : (
-              <ul>
-                {recipes.map((recipe) => (
-                  <li key={recipe.recipe_id}>
-                    <Typography variant="h6">{recipe.name}</Typography>
-                    <Typography>{recipe.description}</Typography>
-                    <Button
-                      variant="contained"
-                      color="secondary"
-                      onClick={() => handleDeleteRecipe(recipe.recipe_id)}
-                    >
-                      Delete
-                    </Button>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </>
-        )}
-      </div>
+
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={() => setShowRecipes(!showRecipes)}
+      >
+        {showRecipes ? "Hide Recipes" : "Show Recipes"}
+      </Button>
+
+      {loading && <p>Loading...</p>}
+
+      {showRecipes && (
+        <div className="recipe-list">
+          <Typography variant="h5">Recipe List</Typography>
+          {recipes.length === 0 ? (
+            <p>No recipes available.</p>
+          ) : (
+            <ul>
+              {recipes.map((recipe) => (
+                <li key={recipe.recipe_id}>
+                  <h3>{recipe.name}</h3>
+                  <p>{recipe.description}</p>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    onClick={() => onRecipeSelect(recipe)}
+                  >
+                    Select Recipe
+                  </Button>
+                  <Button
+                    variant="contained"
+                    color="secondary"
+                    onClick={() => handleDeleteRecipe(recipe.recipe_id)}
+                  >
+                    Delete Recipe
+                  </Button>
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      )}
     </div>
   );
 };
